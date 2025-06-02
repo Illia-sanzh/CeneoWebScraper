@@ -175,3 +175,5 @@ cython_debug/
 
 #CeneoWebScraper
 config.py
+headers.json
+app/data
