@@ -177,3 +177,5 @@ cython_debug/
 config.py
 headers.json
 app/data
+app/static/bar_charts
+app/static/pie_charts
