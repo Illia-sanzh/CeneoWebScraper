@@ -1,7 +1,10 @@
 from app import app
-from flask import render_template, redirect, request, url_for
+from flask import render_template, redirect, request, url_for, abort
 from app.forms import ProductIdForm
 from app.models import Product
+import os
+import json
+
 
 @app.route('/')
 def index():
@@ -31,11 +34,19 @@ def extract():
 
 @app.route('/product/<product_id>')
 def product(product_id):
-    return render_template('product.html', product_id=product_id)
+    reviews = []
+    file_path = f'./app/data/opinions/{product_id}.json'
+
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            reviews = json.load(f)
+    except FileNotFoundError:
+        print(f"Error: File not found at {file_path}")
+    return render_template('product.html', reviews=reviews, product_id=product_id)
 
 @app.route('/charts/<product_id>')
 def charts(product_id):
-    return render_template('charts.html')
+    return render_template('charts.html', product_id=product_id)
 
 @app.route('/products')
 def products():

@@ -1,4 +1,14 @@
 {% extends 'base.html' %}
-{% block content %}
+{% block title %}
+Charts for {{ product_id }}
 {% endblock %}
-{% block title %} {% endblock %}
+{% block content %}
+    <a href="{{url_for('product', product_id=product_id)}}">Product</a>
+    <div class="container">
+        <h3>Bar Chart</h3>
+        <img src="{{ url_for('static', filename='bar_charts/' + product_id + '.png') }}" alt="Bar chart for product {{ product_id }}">
+
+        <h3 >Pie Chart</h3>
+        <img src="{{ url_for('static', filename='pie_charts/' + product_id + '.png') }}" alt="Pie chart for product {{ product_id }}">
+    </div>
+{% endblock %}
